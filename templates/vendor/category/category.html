@@ -1,0 +1,97 @@
+{% extends 'vendor/layout.html' %}
+{% load static %}
+
+{% block category-side %}
+    active bg-gradient-primary
+{% endblock %}
+
+{% block page_name %}
+    Categories
+{% endblock %}
+
+{% block title %}
+    <title>Category</title>
+    <style>
+        button a {
+            color: white;
+        }
+
+        button a:hover {
+            color: white;
+        }
+
+        .btn-action {
+            padding: 8px 10px;
+            border-radius: 5px;
+            border: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'vendor:add_category' %}" class="ms-4">
+        <button type="button" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Add Category
+        </button>
+    </a>
+    <div class="card mx-4">
+        <div class="table-responsive">
+            <table class="table align-items-center mb-0">
+                <thead>
+                <tr>
+                    <th class="text-capitalize text-secondary text-xs font-weight-bolder opacity-7">
+                        Category
+                    </th>
+                    <th class="text-capitalize text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                        Average Price
+                    </th>
+                    <th class="text-capitalize text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                        Product Count
+                    </th>
+                    <th class="text-capitalize text-secondary text-xs text-center">
+                        Action
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in categories %}
+                    <tr>
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div>
+                                    <img src="{{ item.image.url }}" class="avatar avatar-sm me-3">
+                                </div>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-xs">{{ item.category_name }}</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <span class="text-secondary text-xs font-weight-normal">
+                                {{ item.avg_price }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="text-secondary text-xs font-weight-normal">
+                                {{ item.get_counts }}
+                            </span>
+                        </td>
+                        <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-normal">
+                                <a href="" class="btn btn-danger px-2 py-2">
+                                    <i class="material-icons">delete</i>
+                                </a>
+                                <a href="{% url 'vendor:update_category' item.id %}" class="btn btn-warning px-2 py-2">
+                                    <i class="material-icons">mode_edit</i>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div>
+        </div>
+    </div>
+{% endblock %}

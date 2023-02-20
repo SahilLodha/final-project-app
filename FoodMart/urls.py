@@ -6,7 +6,10 @@ from FoodMart import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('store.urls')),
     path('vendor/', include('vendor.urls')),
+    path('account/', include('accounts.urls')),
     path('customer/', include('customer.urls')),
     re_path(r'^media/(?P<path>.*)$', serve, kwargs={'document_root': settings.MEDIA_ROOT})
 ]
+

@@ -1,0 +1,114 @@
+{% extends 'customer\base.html' %}
+{% load static %}
+{% block title %} Store Page {% endblock %}
+{% block onpagecss %}
+    <style>
+        .pname:hover {
+            text-decoration: none;
+            text-underline: none;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h3 class="text-center py-4">Browse Store</h3>
+        <div class="px-3">
+            {% for p, quantity in products.object_list %}
+                <div class="card" style="width: 20rem; margin: 1rem">
+                    <img class="card-img-top" src="{{ MEDIA_URL }}{{ p.get_first_image }}" style="height: calc(5vw +
+                    200px)" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="{% url 'store:details' p.id %}" class="pname">
+                                {{ p.product_name }}
+                            </a>
+                        </h4>
+                        <p class="card-text">Price: <span class="font-bold">Rs.{{ p.price }}</span> |
+                            Stock: <span class="font-bold">{{ p.stock }} Pcs</span>
+                        </p>
+
+                        <form action="{% url 'store:cart' id=p.id %}" method="post">
+                            {% csrf_token %}
+                            {% if quantity > 1 %}
+                                <input type="number" class="form-control" value="{{ quantity }}" name="quantity">
+                            {% else %}
+                                <input type="number" class="form-control" value="1" name="quantity">
+                            {% endif %}
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-shopping-cart"></i>
+                                {% if quantity == 0 %}
+                                    Add to Cart
+                                {% else %}
+                                    Update Qty
+                                {% endif %}
+                            </button>
+
+                            <a href="{% url 'store:details' p.id %}" class="btn btn-success">
+                                <i class="fas fa-book"></i> View Detail
+                            </a>
+                        </form>
+
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+
+        <div class="m-4 text-right row">
+            <ul class="pagination">
+                {% if products.has_previous %} {# whether the previous page exists #}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ products.previous_page_number }}"><< Previous</a>
+                    </li>
+                {% endif %}
+                {# the current page number #}
+                <li class="page-item active mx-2">
+                    <span>{{ products.number }}</span>
+                </li>
+
+                {% if products.has_next %} {# whether the previous page exists #}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ products.next_page_number }}">Next >></a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    <hr/>
+    <h2 class="py-4 text-center">Featured</h2>
+    <div class="card-body">
+        {% for p in recommended %}
+            <div class="card" style="width: 20rem; margin: 1rem">
+                <img class="card-img-top" src="{{ MEDIA_URL }}{{ img }}" style="height: calc(5vw + 200px)"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="{% url 'store:details' p.id %}" class="pname">
+                            {{ p.product_name }}
+                        </a>
+                    </h4>
+                    <p class="card-text">Price: <span class="font-bold">Rs.{{ p.price }}</span> |
+                        Stock: <span class="font-bold">{{ p.stock }} Pcs</span>
+                    </p>
+
+                    <form action="{% url 'store:cart' id=p.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="number" class="form-control" value="{{ quantity }}" name="quantity">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-shopping-cart"></i>
+                            {% if quantity == 0 %}
+                                Add to Cart
+                            {% else %}
+                                Update Qty
+                            {% endif %}
+                        </button>
+
+                        <a href="{% url 'store:details' p.id %}" class="btn btn-success">
+                            <i class="fas fa-book"></i> View Detail
+                        </a>
+                    </form>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

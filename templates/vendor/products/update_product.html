@@ -1,0 +1,136 @@
+{% extends 'vendor/layout.html' %}
+{% block title %}
+    <title>Add Product</title>
+    <style>
+        .btn-custom {
+            border-radius: 0;
+            color: white;
+            background-color: black;
+            padding: 10px 20px;
+            border: none;
+            font-size: 15px;
+        }
+
+        .btn-custom:hover {
+            background-color: #2C2C2C;
+        }
+    </style>
+{% endblock %}
+{% block product-side %} active bg-gradient-primary {% endblock %}
+
+{% block content %}
+    <div class="card p-2 mx-4 px-4 py-4 mb-4">
+        <div class="card-title">
+            <h3>Update Product</h3>
+            <hr>
+        </div>
+        <form action="{% url 'vendor:update_product' product.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="input-group input-group-static my-3 col">
+                    <label for="name">Product Name:</label>
+                    <input type="text" class="form-control" id="name" name="product_name"
+                           value="{{ product.product_name }}">
+                </div>
+                <div class="input-group input-group-static my-3 col">
+                    <select name="brand" id="brand" class="form-control">
+                        {% for brand in brands %}
+                            {% if brand.id == product.brand.id %}
+                                <option value="{{ product.brand.id }}" selected>{{ product.brand.brand_name }}</option>
+                            {% else %}
+                                <option value="{{ product.brand.id }}">{{ product.brand.brand_name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-group input-group-static my-3">
+                <textarea name="description" id='description' class="form-control" cols="30" rows="10"
+                          placeholder="Description">{{ product.description }}</textarea>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="" for="stock">Stock:</label>
+                    <div class="input-group input-group-static mb-3">
+                        <input type="number" id="stock" class="form-control" name="stock" value="{{ product.stock }}">
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="" for="price">Price:</label>
+                    <div class="input-group input-group-static mb-3">
+                        <input type="number" id="price" class="form-control" name="price" value="{{ product.price }}">
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="">Is Avaliable</label>
+                    <div class="input-group input-group-static mb-3">
+                        <select name="is_avaliable" id="is_avaliable" class="form-control">
+                            {% if product.is_avaliable == true %}
+                                <option value="1" selected>Yes</option>
+                                <option value="0">No</option>
+                            {% else %}
+                                <option value="1">Yes</option>
+                                <option value="0" selected>No</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group input-group-static">
+                        <select name="category" id="category" class="form-control">
+                            {% for category in categories %}
+                                {% if category.id != product.category.id %}
+                                    <option value="{{ product.category.id }}">{{ category.category_name }}</option>
+                                {% else %}
+                                    <option value="{{ product.category.id }}" selected>
+                                        {{ category.category_name }}
+                                    </option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="input-group input-group-static">
+                        <select name="subcategory" id="subcategory" class="form-control">
+                            {% for subcategory in subcategories %}
+                                {% if subcategory.id == product.subcategory.id %}
+                                    <option value="{{ subcategory.id }}" selected>
+                                        {{ subcategory.subcategory_name }}
+                                    </option>
+                                {% else %}
+                                    <option value="{{ subcategory.id }}">
+                                        {{ subcategory.subcategory_name }}
+                                    </option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            {#            <div class="card my-3 p-3 col-lg-5 col-md-6 col-sm-12">#}
+            {#                <div class="card-title">#}
+            {#                    <h5>File Upload</h5>#}
+            {#                    <input type="file" id="file-input" name="images" hidden multiple>#}
+            {#                    <div id="file-browser"><i class="fas fa-cloud-upload-alt"></i>&nbsp;Browse To Upload</div>#}
+            {#                    <hr>#}
+            {#                    <section class="progress-area">#}
+            {#                    </section>#}
+            {#                </div>#}
+            {#            </div>#}
+
+            <div class="mt-3 rounded-0">
+                <button type="submit" class="btn-custom">Update <i class="fas fa-edit"></i></button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascript-custom %}
+    <script src="{% static 'vendor/js/update_product_script.js' %}"></script>
+{% endblock %}
