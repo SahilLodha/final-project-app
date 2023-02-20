@@ -45,7 +45,8 @@
     </div>
 </section>
 
-<div class="container">
+<div class="container pt-5">
+    <h2 class="text-center">What we <span style="color: var(--primary-color)">Offer</span></h2>
     <section id="features" class="row my-5">
         <div class="col-md-2">
             <div class="card pb-2">
@@ -105,9 +106,8 @@
 </div>
 
 
-<section id="product">
+<section id="featured-product" class="py-5">
     <h2 class="text-center">Featured Products</h2>
-    <p class="text-center">Most Popular Products</p>
     <div class="container">
         <div class="row justify-content-start gap-3">
             <div class="card shopping-card">
@@ -125,8 +125,29 @@
             </div>
         </div>
     </div>
-
 </section>
+
+<section id="recents-product" class="py-5">
+    <h2 class="text-center">Recently Added</h2>
+    <div class="container">
+        <div class="row justify-content-start gap-3">
+            <div class="card shopping-card">
+                <div class="card-body p-0">
+                    <img src="{% static 'img/store/products/f1.jpg' %}" alt="Product Image" class="card-img product-card-img">
+                    <div class="card-description p-2">
+                        <div class="text-sm text-bolder">Vendor Name</div>
+                        <h4 href="#" class="product-name">Product Name</h4>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="price-tag"><strong>Rs. 7200</strong> </p>
+                            <a href="#" class="fas fa-cart-plus cart-btn"> Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <script src="{% static 'customs/js/script.js' %}"></script>
 
 </body>

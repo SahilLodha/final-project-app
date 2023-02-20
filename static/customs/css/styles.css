@@ -115,6 +115,7 @@ body {
 /* Hero */
 #hero {
     background-image: url('../../img/store/hero-image.jpg');
+    background-attachment: fixed;
     height: 90vh;
     width: 100%;
     background-size: cover;
@@ -145,6 +146,11 @@ body {
     background-color: #E83875;
 }
 
+#featured-product {
+    background-image: url("../../img/store/hero-image.jpg");
+     background-size: cover;
+    background-attachment: fixed;
+}
 /* Text Bubble */
 .text-bubble {
     border: 1px solid var(--secondary-color);
