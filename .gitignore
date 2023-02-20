@@ -1,3 +1,7 @@
 /FoodMart/settings.py
 /media
 /.idea
+/db.sqlite3
+/django.log
+/logs
+/project_env
