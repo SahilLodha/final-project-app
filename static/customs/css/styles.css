@@ -128,7 +128,7 @@ body {
     color: var(--primary-color) !important;
 }
 
-/* Hero */
+/* Hero  and Shop*/
 #hero {
     background-image: url('../../img/store/hero-image.jpg');
     background-attachment: fixed;
@@ -233,4 +233,13 @@ body {
 
 .cart-thumbnail {
     height: 2rem;
+}
+
+/* Shop */
+#shop{
+    background: url("../../img/store/hero-image.jpg") fixed;
+    height: 90vh;
+    width: 100%;
+    background-size: cover;
+    padding: 0 80px;
 }

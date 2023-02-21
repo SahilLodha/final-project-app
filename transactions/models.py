@@ -4,6 +4,7 @@ from product.models import Product
 from accounts.models import Account
 from customer.models import AddressDetails
 
+
 # Create your models here.
 class Transaction(models.Model):
     date = models.DateTimeField(auto_now_add=datetime.now())

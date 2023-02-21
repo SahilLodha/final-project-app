@@ -1,6 +1,8 @@
+from django.core.paginator import Paginator
 from django.views import View
 from django.shortcuts import render
 from product.models import Product
+from django.views.generic import ListView
 
 
 class HomeView(View):
@@ -19,3 +21,14 @@ class ProductDetailView(View):
 class CartView(View):
     def get(self, request):
         return render(request, 'store/cart.html')
+
+
+class ShopView(ListView):
+    model = Product
+    template_name = 'store/shop.html'
+    paginate_by = 40
+    http_method_names = ['get']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(is_available=True)

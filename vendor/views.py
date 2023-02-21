@@ -1,4 +1,5 @@
 from django import views
+from django.views.generic import ListView
 from django.contrib import messages
 
 # Redirection Imports
@@ -17,12 +18,16 @@ from FoodMart.decorators import unauthenticated_user
 from transactions.models import TransactionItem
 
 
-class OrderListView(VendorMixin, views.View):
+class OrderListView(VendorMixin, ListView):
     login_url = reverse_lazy('account:login')
+    model = TransactionItem
+    template_name = 'vendor/order.html'
+    paginate_by = 20
+    http_method_names = ['get']
 
-    def get(self, request):
-        items = TransactionItem.objects.filter(product__vendor_id=request.user).filter(status=1)
-        return render(request, 'vendor/order.html', {"items": items})
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(product__vendor_id=self.request.user).filter(status=1)
 
 
 class ChangeStatusDelivered(LoginRequiredMixin, views.View):
