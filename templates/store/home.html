@@ -1,2 +1,125 @@
 {% extends 'store/base.html' %}
 {% load static %}
+
+{% block home_active %}
+    active
+{% endblock %}
+
+{% block content %}
+    <section id="hero">
+        <h4>eCommerce the new age ....</h4>
+        <h2>Fresh prices and Fresh Products ....</h2>
+        <h1>Products delivered to your home ....</h1>
+        <p>We are just one order away ....</p>
+        <div class="d-flex btn-group">
+            <button class="btn btn-primary px-4 py-2">Start Shopping</button>
+            <button class="btn btn-secondary px-4 py-2">Register</button>
+        </div>
+    </section>
+
+    <div class="container pt-5">
+        <h2 class="text-center">What we <span style="color: var(--primary-color)">Offer</span></h2>
+        <section id="features" class="row my-5">
+            <div class="col-md-2">
+                <div class="card pb-2">
+                    <div class="card-body">
+                        <img src="{% static 'img/customer/feature/f1.png' %}" alt="feature" class="card-img">
+                    </div>
+                    <div class="card-description text-center text-bolder">Order Online</div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="card pb-2">
+                    <div class="card-body">
+                        <img src="{% static 'img/customer/feature/f2.png' %}" alt="feature" class="card-img">
+                    </div>
+                    <div class="card-description text-center text-bolder">Timely Delivery</div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="card pb-2">
+                    <div class="card-body">
+                        <img src="{% static 'img/customer/feature/f3.png' %}" alt="feature" class="card-img">
+                    </div>
+                    <div class="card-description text-center text-bolder">Save Money</div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="card pb-2">
+                    <div class="card-body">
+                        <img src="{% static 'img/customer/feature/f4.png' %}" alt="feature" class="card-img">
+                    </div>
+                    <div class="card-description text-center text-bolder">Satisfaction</div>
+                </div>
+            </div>
+
+
+            <div class="col-md-2">
+                <div class="card pb-2">
+                    <div class="card-body">
+                        <img src="{% static 'img/customer/feature/f5.png' %}" alt="feature" class="card-img">
+                    </div>
+                    <div class="card-description text-center text-bolder">Collaboration</div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="card pb-2">
+                    <div class="card-body">
+                        <img src="{% static 'img/customer/feature/f6.png' %}" alt="feature" class="card-img">
+                    </div>
+                    <div class="card-description text-center text-bolder">Support</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section id="featured-product" class="py-5">
+        <h2 class="text-center mb-4">Featured Products</h2>
+        <div class="container">
+            <div class="row justify-content-start gap-3">
+                <div class="card shopping-card">
+                    <div class="card-body p-0">
+                        <img src="{% static 'img/store/products/f1.jpg' %}" alt="Product Image"
+                             class="card-img product-card-img">
+                        <div class="card-description p-2">
+                            <div class="text-sm text-bolder">Vendor Name</div>
+                            <h4 href="#" class="product-name">Product Name</h4>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="price-tag"><strong>Rs. 7200</strong></p>
+                                <a href="#" class="fas fa-cart-plus cart-btn"> Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="recents-product" class="py-5">
+        <h2 class="text-center mb-4">Recently Added</h2>
+        <div class="container">
+            <div class="row justify-content-start gap-3">
+                {% for product in latest %}
+                    <div class="card shopping-card">
+                        <div class="card-body p-0">
+                            <img src="{{ MEDIA_URL }}{{ product.get_first_image }}" alt="Product Image"
+                                 class="card-img product-card-img">
+                            <div class="card-description p-2">
+                                <div class="text-sm text-bolder">{{ product.vendor_id }}</div>
+                                <a href="{% url 'store:product_detail' product.id %}"><h4 class="product-name">{{ product.product_name }}</h4></a>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="price-tag"><strong>Rs. {{ product.price }}</strong></p>
+                                    <a href="#" class="fas fa-cart-plus cart-btn"> Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

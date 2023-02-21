@@ -54,9 +54,6 @@ class Product(models.Model):
     def __str__(self):
         return f'{self.id} - {self.product_name} - {self.price}'
 
-    def get_stock(self):
-        return self.stock
-
     @property
     def get_first_image(self):
         return ProductImage.objects.filter(product_id=self).first()

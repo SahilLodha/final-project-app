@@ -109,7 +109,23 @@ body {
 
 .active {
     background: var(--primary-color);
-    color: whitesmoke;
+    color: var(--cloud-white) !important;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.footer-anchor {
+    color: var(--cloud-white) !important;
+    display: block;
+    padding: 5px 0;
+}
+
+.footer-anchor:hover {
+    color: var(--primary-color) !important;
 }
 
 /* Hero */
@@ -158,7 +174,6 @@ body {
     padding: 5px 8px
 }
 
-
 /* Product Cart */
 .product-name {
     color: var(--primary-color);
@@ -167,12 +182,12 @@ body {
 }
 
 .product-card-img {
-    border-radius: 0;
+    border-radius: inherit;
 }
 
 .shopping-card {
     margin: 0 0 15px;
-    padding: 0;
+    padding: 5px;
     max-width: 300px;
     border: 1px solid var(--secondary-color);
     overflow: hidden;
@@ -193,4 +208,29 @@ body {
 .cart-btn:hover{
     background-color: var(--bs-success);
     color: var(--cloud-white);
+}
+
+#prodetails .single-pro-image {
+    width: 40%;
+    margin-right: 50px;
+}
+
+.small-img-col {
+    flex-basis: 24%;
+    cursor: pointer;
+}
+
+
+/*cart page*/
+#cart {
+    height: 30vh;
+    background: linear-gradient(rgb(72,0,72,0.9), rgb(192,72,72,0.9)), url("../../img/header/cart.jpg") fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-thumbnail {
+    height: 2rem;
 }
