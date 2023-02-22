@@ -12,6 +12,7 @@ urlpatterns = [
     path('register/', views.CustomerRegisterView.as_view(), name='register'),
     path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
     path('history/', views.HistoryView.as_view(), name='history'),
+    path('recommendation/', views.RecommendationView.as_view())
     # path('profile/address/', views.CustomerAddress.as_view(), name="address_add"),
     # path('featured/<str:code>/', views.CustomerFeaturedView.as_view(), name='featured'),
     # path('profile/remove/address/<int:id>', views.AddressModifyView.as_view(), name="modify_address"),

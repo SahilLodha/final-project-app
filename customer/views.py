@@ -2,7 +2,9 @@
 from django.views import View
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
+from transactions.models import Transaction, TransactionItem
+from customer.apps import RecommendationConfig
 
 # Importing Models ...
 from product.models import Product
@@ -59,3 +61,14 @@ class HistoryView(CustomerMixin, View):
 class ProfileView(CustomerMixin, View):
     def get(self, request):
         return render(request, 'customer/')
+
+
+class RecommendationView(CustomerMixin, View):
+    def get(self, request):
+        # transactions = Transaction.objects.filter(customer_id=request.user.id)
+        # transactions = list(TransactionItem.objects.filter(transaction__customer_id=
+        #                                               request.user.id).values_list('product_id', flat=True))
+        all_products = RecommendationConfig.model.X_train.loc[request.user.id]
+        recommmendations = RecommendationConfig.model.predict(all_products).index
+        print(recommmendations)
+        return HttpResponse(recommmendations)
